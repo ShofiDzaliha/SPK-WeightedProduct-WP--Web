@@ -1,0 +1,1528 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>SPK Weighted Product (WP) — White Purple Theme</title>
+  <style>
+    /* =========================
+       SINGLE THEME: WHITE + PURPLE (no dark mode)
+       ========================= */
+    :root{
+      --bg:#fbf9ff;
+      --text:#1b1026;
+      --muted:#5a476f;
+      --line:rgba(74, 22, 120, .16);
+
+      --card:#ffffff;
+      --card2:#f1e9ff;
+
+      /* purple slightly darker */
+      --accent:#6d28d9;
+      --accent2:#9333ea;
+
+      --good:#16a34a;
+      --warn:#f59e0b;
+      --bad:#ef4444;
+
+      --shadow: 0 10px 24px rgba(60, 10, 110, .12);
+      --radius:18px;
+
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+    }
+
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:var(--sans);
+      color:var(--text);
+      background:
+        radial-gradient(1200px 600px at 20% -10%, rgba(109, 40, 217, .20), transparent 60%),
+        radial-gradient(900px 500px at 85% 10%, rgba(147, 51, 234, .16), transparent 60%),
+        linear-gradient(180deg, #ffffff, var(--bg) 40%, rgba(0,0,0,.01));
+      min-height:100vh;
+    }
+
+    header{
+      padding:28px 16px 14px;
+      max-width:1200px;
+      margin:0 auto;
+    }
+    .title{
+      display:flex;
+      gap:12px;
+      align-items:flex-start;
+      justify-content:space-between;
+      flex-wrap:wrap;
+    }
+    h1{
+      margin:0;
+      font-size: clamp(22px, 2.4vw, 34px);
+      letter-spacing:.2px;
+      line-height:1.15;
+    }
+    .subtitle{
+      margin-top:8px;
+      color:var(--muted);
+      max-width:900px;
+      line-height:1.5;
+      font-size:14px;
+    }
+
+    .pillrow{
+      display:flex; gap:8px; flex-wrap:wrap; align-items:center;
+      margin-top:14px;
+    }
+    .pill{
+      border:1px solid var(--line);
+      background: rgba(109, 40, 217, .07);
+      color: var(--muted);
+      padding:8px 10px;
+      border-radius:999px;
+      font-size:12px;
+    }
+    .pill b{color:var(--text); font-weight:700}
+
+    main{
+      max-width:1200px;
+      margin: 0 auto;
+      padding: 10px 16px 40px;
+      display:grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap:16px;
+    }
+    @media (max-width: 980px){
+      main{grid-template-columns:1fr}
+    }
+
+    .card{
+      background: linear-gradient(180deg, rgba(255,255,255,.92), rgba(255,255,255,.75));
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+
+    .card .hd{
+      padding:16px 16px 12px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      border-bottom: 1px solid var(--line);
+      background: rgba(109, 40, 217, .06);
+    }
+
+    .card .hd h2{
+      margin:0;
+      font-size:16px;
+      letter-spacing:.2px;
+    }
+    .card .bd{ padding:16px; }
+
+    .grid2{ display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+    @media (max-width: 640px){ .grid2{grid-template-columns:1fr} }
+
+    label{
+      display:block;
+      color:var(--muted);
+      font-size:12px;
+      margin-bottom:6px;
+    }
+    input, select, textarea{
+      width:100%;
+      padding:10px 11px;
+      border-radius:12px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.94);
+      color:var(--text);
+      outline:none;
+    }
+    input:focus, select:focus, textarea:focus{
+      border-color: rgba(109, 40, 217, .55);
+      box-shadow: 0 0 0 4px rgba(109, 40, 217, .12);
+    }
+    textarea{ resize: vertical; min-height: 120px; }
+
+    .row{ display:flex; gap:10px; align-items:center; flex-wrap:wrap; }
+
+    .btn{
+      cursor:pointer;
+      border:1px solid var(--line);
+      background: rgba(109, 40, 217, .10);
+      color: var(--text);
+      padding:10px 12px;
+      border-radius: 12px;
+      font-weight:800;
+      letter-spacing:.2px;
+      transition:.15s ease;
+      user-select:none;
+    }
+    .btn:hover{ transform: translateY(-1px); background: rgba(109, 40, 217, .14); }
+    .btn:active{ transform: translateY(0px); }
+
+    .btn.primary{
+      border-color: rgba(109, 40, 217, .55);
+      background: linear-gradient(180deg, rgba(109, 40, 217, .25), rgba(147, 51, 234, .18));
+    }
+    .btn.danger{
+      border-color: rgba(239,68,68,.35);
+      background: linear-gradient(180deg, rgba(239,68,68,.16), rgba(239,68,68,.08));
+    }
+    .btn.good{
+      border-color: rgba(22,163,74,.30);
+      background: linear-gradient(180deg, rgba(22,163,74,.16), rgba(22,163,74,.08));
+    }
+    .btn.small{ padding:8px 10px; font-size:12px; border-radius: 10px;}
+
+    .muted{ color: var(--muted); font-size:12px; line-height:1.45; }
+
+    .note{
+      border:1px dashed rgba(109, 40, 217, .35);
+      padding:12px;
+      border-radius: 14px;
+      background: rgba(109, 40, 217, .05);
+      line-height:1.5;
+      color: var(--muted);
+      font-size:12px;
+    }
+    .note b{color:var(--text)}
+
+    .tablewrap{
+      overflow:auto;
+      border-radius: 14px;
+      border:1px solid var(--line);
+      background: rgba(109, 40, 217, .03);
+    }
+
+    table{
+      border-collapse:collapse;
+      width:100%;
+      min-width: 720px;
+      font-size:13px;
+    }
+    th, td{
+      border-bottom:1px solid rgba(74, 22, 120, .12);
+      padding:10px 10px;
+      text-align:left;
+      vertical-align:middle;
+      white-space:nowrap;
+    }
+
+    th{
+      font-size:12px;
+      color:var(--muted);
+      font-weight:900;
+      background: rgba(109, 40, 217, .07);
+      position:sticky;
+      top:0;
+      backdrop-filter: blur(8px);
+    }
+    tr:last-child td{border-bottom:none}
+
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      padding:4px 8px;
+      border-radius:999px;
+      font-size:11px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.65);
+      color: var(--muted);
+    }
+
+    .badge.benefit{ border-color: rgba(22,163,74,.35); color: rgba(22,163,74,.95);}
+    .badge.cost{ border-color: rgba(245,158,11,.35); color: rgba(245,158,11,.95);}
+
+    .rank1{
+      outline: 2px solid rgba(109, 40, 217, .25);
+      box-shadow: 0 0 0 4px rgba(109, 40, 217, .10);
+      border-radius: 10px;
+    }
+
+    .toast{
+      margin-top:12px;
+      padding:10px 12px;
+      border-radius: 12px;
+      border:1px solid rgba(239,68,68,.30);
+      background: rgba(239,68,68,.08);
+      color: rgba(120,0,10,.88);
+      display:none;
+      line-height:1.45;
+      font-size:12px;
+    }
+    .success{
+      border-color: rgba(22,163,74,.28);
+      background: rgba(22,163,74,.10);
+      color: rgba(0,90,45,.90);
+    }
+
+    .mono{ font-family: var(--mono); }
+    .footer{
+      max-width:1200px;
+      margin: 0 auto;
+      padding: 0 16px 26px;
+      color: var(--muted);
+      font-size:12px;
+      line-height:1.5;
+    }
+    .kbd{
+      font-family: var(--mono);
+      font-size:11px;
+      padding:2px 6px;
+      border-radius:8px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.85);
+      color: var(--text);
+    }
+
+    /* ===== Chart ===== */
+    .chart{
+      border:1px solid var(--line);
+      border-radius: 14px;
+      background: rgba(109, 40, 217, .03);
+      padding: 12px;
+    }
+    .chartTop{
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap:10px;
+      margin-bottom:10px;
+    }
+    .chartTitle{ font-weight:950; font-size:13px; letter-spacing:.2px; }
+    .chartSub{ color: var(--muted); font-size:12px; }
+    .bars{ display:grid; gap:10px; }
+    .barRow{
+      display:grid;
+      grid-template-columns: 160px 1fr 110px;
+      gap:10px;
+      align-items:center;
+    }
+    @media (max-width: 520px){ .barRow{ grid-template-columns: 1fr; } }
+    .barLabel{
+      font-size:12px;
+      color: var(--text);
+      overflow:hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .barTrack{
+      height: 12px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.75);
+      overflow:hidden;
+    }
+    .barFill{
+      height:100%;
+      width:0%;
+      border-radius:999px;
+      background: linear-gradient(90deg, rgba(109,40,217,.85), rgba(147,51,234,.85));
+      transition: width .45s ease;
+    }
+    .barValue{
+      text-align:right;
+      font-family: var(--mono);
+      font-size:12px;
+      color: var(--muted);
+    }
+
+    details{
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.70);
+      border-radius: 14px;
+      padding: 10px 12px;
+    }
+    summary{
+      cursor:pointer;
+      font-weight:900;
+      color: var(--text);
+      list-style:none;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+    }
+    summary::-webkit-details-marker{ display:none; }
+    .chev{ font-family: var(--mono); color: var(--muted); font-size: 12px; }
+
+    @media print{
+      body{ background:#fff !important; color:#000 !important; }
+      header .row, #btnAddCriteria, #btnAddAlt, #btnImport, #btnExport, #btnDeleteAll, #btnCompute,
+      #btnLoadExample, #btnReset, #btnCopyResult, #btnPrint, #btnImportCSV,
+      #btnExportResultJSON, #btnExportResultCSV, #btnGenerateReport, #btnCopyReport,
+      #btnGenerateAppendix, #btnCopyAppendix, #btnExportAppendixTxt {
+        display:none !important;
+      }
+      .card, .tablewrap, .chart, .note, details{ box-shadow:none !important; }
+      main{ grid-template-columns: 1fr !important; }
+      .footer, .pillrow{ display:none !important; }
+      input, select, textarea{
+        border:1px solid rgba(0,0,0,.20) !important;
+        background:#fff !important;
+        color:#000 !important;
+      }
+      th{ position:static !important; }
+      textarea{ border:1px solid rgba(0,0,0,.20) !important; background:#fff !important; color:#000 !important; }
+    }
+  </style>
+</head>
+<body>
+<header>
+  <div class="title">
+    <div>
+      <h1>SPK Weighted Product (WP)</h1>
+      <div class="subtitle">
+        <b>Ada import CSV/JSON, grafik V, detail lengkap, export hasil, generate laporan, dan <b>lampiran perhitungan otomatis</b>.
+      </div>
+      <div class="pillrow">
+        <div class="pill">📊 <b>Grafik V</b></div>
+        <div class="pill">⚖️ <b>wNorm</b></div>
+        <div class="pill">🧾 <b>Detail lengkap</b></div>
+        <div class="pill">📤 <b>Export hasil</b> CSV/JSON</div>
+        <div class="pill">📝 <b>Laporan</b></div>
+        <div class="pill">📎 <b>Lampiran otomatis</b></div>
+      </div>
+    </div>
+    <div class="row">
+      <button class="btn small" id="btnPrint">Print PDF</button>
+      <button class="btn small" id="btnLoadExample">Muat Contoh</button>
+      <button class="btn small" id="btnReset">Reset</button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <!-- INPUT -->
+  <section class="card">
+    <div class="hd">
+      <h2>Input Kasus</h2>
+      <div class="row">
+        <button class="btn small" id="btnAddCriteria">+ Kriteria</button>
+        <button class="btn small" id="btnAddAlt">+ Alternatif</button>
+      </div>
+    </div>
+    <div class="bd">
+
+      <div class="grid2">
+        <div>
+          <label>Judul Kasus</label>
+          <input id="caseTitle" placeholder="Contoh: Pemilihan Supplier Terbaik" />
+        </div>
+        <div>
+          <label>Presisi Output (angka desimal)</label>
+          <input id="precision" type="number" min="0" max="12" value="6"/>
+        </div>
+      </div>
+
+      <div style="height:14px"></div>
+
+      <div class="note">
+        <b>Catatan WP:</b> semua nilai kriteria harus <b>&gt; 0</b>.
+        Untuk kriteria <b>COST</b>, sign = -1 sehingga nilai kecil lebih baik.
+      </div>
+
+      <div style="height:14px"></div>
+
+      <div class="row" style="justify-content:space-between; align-items:flex-end;">
+        <div>
+          <div class="muted">Kriteria</div>
+          <div class="muted">kode, nama, tipe, bobot</div>
+        </div>
+        <div class="row">
+          <button class="btn small" id="btnImport">Import JSON</button>
+          <button class="btn small" id="btnImportCSV">Import CSV</button>
+          <button class="btn small" id="btnExport">Export JSON</button>
+          <input id="fileInput" type="file" accept="application/json" hidden />
+          <input id="fileCSV" type="file" accept=".csv,text/csv" hidden />
+        </div>
+      </div>
+
+      <div style="height:10px"></div>
+
+      <div class="tablewrap">
+        <table id="criteriaTable">
+          <thead>
+            <tr>
+              <th style="width:110px">Kode</th>
+              <th>Nama Kriteria</th>
+              <th style="width:140px">Tipe</th>
+              <th style="width:120px">Bobot</th>
+              <th style="width:90px">Aksi</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+
+      <div style="height:10px"></div>
+      <div class="note">
+        <b>Format CSV</b>:<br>
+        1) <span class="mono">code,name,C1,C2,...</span><br>
+        2) <span class="mono">,,benefit,cost,...</span><br>
+        3) <span class="mono">,,5,4,...</span><br>
+        4+) <span class="mono">A1,Nama,10,20,...</span>
+      </div>
+
+      <div style="height:16px"></div>
+
+      <div class="muted">Alternatif</div>
+      <div class="muted">nilai &gt; 0</div>
+
+      <div style="height:10px"></div>
+
+      <div class="tablewrap">
+        <table id="altTable">
+          <thead id="altHead"></thead>
+          <tbody id="altBody"></tbody>
+        </table>
+      </div>
+
+      <div style="height:14px"></div>
+
+      <div class="row" style="justify-content:space-between;">
+        <button class="btn danger" id="btnDeleteAll">Hapus Semua Data</button>
+        <button class="btn primary" id="btnCompute">Hitung WP & Ranking</button>
+      </div>
+
+      <div class="toast" id="toast"></div>
+    </div>
+  </section>
+
+  <!-- OUTPUT -->
+  <section class="card">
+    <div class="hd">
+      <h2>Hasil</h2>
+      <div class="row">
+        <button class="btn small" id="btnCopyResult">Copy Ringkasan</button>
+      </div>
+    </div>
+    <div class="bd">
+      <div id="resultEmpty" class="note">
+        Klik <b>Hitung WP & Ranking</b> untuk melihat hasil.
+      </div>
+
+      <div id="resultArea" style="display:none;">
+        <div class="note" id="recommendationBox"></div>
+
+        <div style="height:12px"></div>
+
+        <div class="row" style="justify-content:space-between; margin-bottom:10px;">
+          <div class="muted">Export hasil (ranking + detail)</div>
+          <div class="row">
+            <button class="btn small" id="btnExportResultJSON">Export Hasil JSON</button>
+            <button class="btn small" id="btnExportResultCSV">Export Hasil CSV</button>
+          </div>
+        </div>
+
+        <div class="tablewrap" style="margin-bottom:12px;">
+          <table id="wNormTable">
+            <thead>
+              <tr>
+                <th style="width:90px">Kode</th>
+                <th>Nama Kriteria</th>
+                <th style="width:120px">Tipe</th>
+                <th style="width:120px">Bobot</th>
+                <th style="width:140px">wNorm</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+
+        <div class="chart" id="chartBox">
+          <div class="chartTop">
+            <div>
+              <div class="chartTitle">Grafik Batang Nilai V</div>
+              <div class="chartSub">Skala relatif (terbesar = terbaik)</div>
+            </div>
+            <div class="chartSub mono" id="chartMeta"></div>
+          </div>
+          <div class="bars" id="bars"></div>
+        </div>
+
+        <div style="height:12px"></div>
+
+        <div class="tablewrap">
+          <table id="resultTable">
+            <thead>
+              <tr>
+                <th style="width:80px">Rank</th>
+                <th style="width:120px">Kode</th>
+                <th>Alternatif</th>
+                <th style="width:160px">ln(S)</th>
+                <th style="width:160px">S</th>
+                <th style="width:160px">V</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+
+        <div style="height:12px"></div>
+
+        <details id="detailFullBox" open>
+          <summary>
+            Detail Perhitungan Lengkap (x, ln(x), sign, wNorm, term) + Σterm
+            <span class="chev">bisa ditutup</span>
+          </summary>
+          <div style="height:10px"></div>
+          <div class="tablewrap">
+            <table id="fullDetailTable">
+              <thead id="fullHead"></thead>
+              <tbody id="fullBody"></tbody>
+            </table>
+          </div>
+        </details>
+
+        <div style="height:12px"></div>
+
+        <!-- REPORT -->
+        <div class="row" style="justify-content:space-between; margin-bottom:10px;">
+          <div class="muted">Laporan otomatis (Bab Hasil & Pembahasan)</div>
+          <div class="row">
+            <button class="btn small good" id="btnGenerateReport">Generate Laporan</button>
+            <button class="btn small" id="btnCopyReport">Copy Laporan</button>
+          </div>
+        </div>
+        <textarea id="reportBox" rows="10" placeholder="Klik 'Generate Laporan'..."></textarea>
+
+        <div style="height:12px"></div>
+
+        <!-- APPENDIX -->
+        <div class="row" style="justify-content:space-between; margin-bottom:10px;">
+          <div class="muted"><b>Lampiran Perhitungan Otomatis</b> (R1–R5, notasi, tabel)</div>
+          <div class="row">
+            <button class="btn small good" id="btnGenerateAppendix">Generate Lampiran</button>
+            <button class="btn small" id="btnCopyAppendix">Copy Lampiran</button>
+            <button class="btn small" id="btnExportAppendixTxt">Export Lampiran TXT</button>
+          </div>
+        </div>
+        <textarea id="appendixBox" rows="14" placeholder="Klik 'Generate Lampiran' untuk membuat lampiran perhitungan lengkap..."></textarea>
+
+        <div style="height:12px"></div>
+        <div class="note">
+          <b>Print PDF:</b> Klik tombol <b>Print PDF</b> → pilih “Save as PDF”.
+          Saat print, tombol/form otomatis disembunyikan agar hasil rapi.
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div class="footer">
+  Tips: klik <b>Generate Lampiran</b> untuk lampiran rumus + tabel (siap tempel).
+</div>
+
+<script>
+  // ======== State (no dark mode) ========
+  const state = {
+    title: "",
+    criteria: [],
+    alternatives: [],
+    lastComputed: null
+  };
+
+  const $ = (sel) => document.querySelector(sel);
+
+  function showToast(msg, type="error"){
+    const t = $("#toast");
+    t.textContent = msg;
+    t.className = "toast" + (type === "success" ? " success" : "");
+    t.style.display = "block";
+    clearTimeout(showToast._timer);
+    showToast._timer = setTimeout(()=> t.style.display = "none", 3600);
+  }
+
+  function safeLower(s){ return String(s || "").toLowerCase().trim(); }
+  function fmt(n, p){
+    if (!Number.isFinite(n)) return "NaN";
+    return n.toFixed(p);
+  }
+
+  function normalizeWeights(criteria){
+    const sum = criteria.reduce((a,c)=> a + Number(c.weight || 0), 0);
+    if (sum <= 0) throw new Error("Total bobot harus > 0.");
+    return criteria.map(c => ({...c, wNorm: Number(c.weight)/sum}));
+  }
+
+  function validate(model){
+    if (!model.title) model.title = "SPK Weighted Product (WP)";
+    if (!Array.isArray(model.criteria) || model.criteria.length === 0) throw new Error("Tambahkan minimal 1 kriteria.");
+    if (!Array.isArray(model.alternatives) || model.alternatives.length === 0) throw new Error("Tambahkan minimal 1 alternatif.");
+
+    const cCodes = new Set();
+    for (const c of model.criteria){
+      if (!c.code) throw new Error("Ada kriteria yang kodenya kosong.");
+      if (cCodes.has(c.code)) throw new Error("Kode kriteria duplikat: " + c.code);
+      cCodes.add(c.code);
+
+      const t = safeLower(c.type);
+      if (t !== "benefit" && t !== "cost") throw new Error("Tipe kriteria " + c.code + " harus benefit/cost.");
+      const w = Number(c.weight);
+      if (!Number.isFinite(w) || w <= 0) throw new Error("Bobot kriteria " + c.code + " harus angka > 0.");
+    }
+
+    const aCodes = new Set();
+    for (const a of model.alternatives){
+      if (!a.code || !a.name) throw new Error("Ada alternatif yang code/nama kosong.");
+      if (aCodes.has(a.code)) throw new Error("Kode alternatif duplikat: " + a.code);
+      aCodes.add(a.code);
+
+      if (!a.values) a.values = {};
+      for (const c of model.criteria){
+        const x = Number(a.values[c.code]);
+        if (!Number.isFinite(x) || x <= 0) throw new Error(`Nilai harus > 0. Periksa ${a.code}.${c.code}`);
+      }
+    }
+  }
+
+  function computeWP(model, precision=6){
+    const criteria = normalizeWeights(model.criteria).map(c=>{
+      const sign = safeLower(c.type) === "cost" ? -1 : 1;
+      return {...c, sign};
+    });
+
+    const scored = model.alternatives.map(a => {
+      let lnS = 0;
+      const perCrit = {};
+      for (const c of criteria){
+        const x = Number(a.values[c.code]);
+        const lnX = Math.log(x);
+        const term = (c.sign * c.wNorm) * lnX;
+        perCrit[c.code] = { x, lnX, sign: c.sign, wNorm: c.wNorm, term };
+        lnS += term;
+      }
+      const S = Math.exp(lnS);
+      return {...a, lnS, S, perCrit};
+    });
+
+    const sumS = scored.reduce((acc,r)=> acc + r.S, 0);
+
+    const ranked = scored
+      .map(r => ({...r, V: r.S / sumS}))
+      .sort((a,b)=> b.V - a.V)
+      .map((r,i)=> ({...r, rank: i+1}));
+
+    return { title: model.title, criteria, ranked, sumS, precision };
+  }
+
+  // ======== CSV Import ========
+  function parseCSV(text){
+    const lines = text.split(/\r?\n/).map(l=>l.trim()).filter(l=>l && !l.startsWith("#"));
+    const rows = [];
+    for (const line of lines){
+      const out = [];
+      let cur = "", inQuotes = false;
+      for (let i=0;i<line.length;i++){
+        const ch = line[i];
+        if (ch === '"' && line[i+1] === '"'){ cur += '"'; i++; }
+        else if (ch === '"'){ inQuotes = !inQuotes; }
+        else if (ch === "," && !inQuotes){ out.push(cur.trim()); cur=""; }
+        else cur += ch;
+      }
+      out.push(cur.trim());
+      rows.push(out);
+    }
+    return rows;
+  }
+
+  function importFromCSVText(text){
+    const rows = parseCSV(text);
+    if (rows.length < 4) throw new Error("CSV minimal 4 baris: header, type, weight, data...");
+
+    const header = rows[0];
+    if (header[0] !== "code" || header[1] !== "name") throw new Error("Header CSV harus: code,name,C1,C2,...");
+
+    const critCodes = header.slice(2);
+    if (critCodes.length === 0) throw new Error("CSV harus punya minimal 1 kriteria.");
+
+    const typeRow = rows[1].slice(2).map(x=>safeLower(x));
+    const weightRow = rows[2].slice(2);
+
+    if (typeRow.length !== critCodes.length) throw new Error("Jumlah type tidak sama dengan jumlah kriteria.");
+    if (weightRow.length !== critCodes.length) throw new Error("Jumlah weight tidak sama dengan jumlah kriteria.");
+
+    const criteria = critCodes.map((code,i)=>{
+      const type = typeRow[i];
+      if (type !== "benefit" && type !== "cost") throw new Error(`Type ${code} harus benefit/cost (baris ke-2).`);
+      const weight = Number(weightRow[i]);
+      if (!Number.isFinite(weight) || weight <= 0) throw new Error(`Weight ${code} harus angka > 0 (baris ke-3).`);
+      return { code, name: code, type, weight };
+    });
+
+    const alternatives = [];
+    for (let r=3; r<rows.length; r++){
+      const row = rows[r];
+      if (!row[0] || !row[1]) throw new Error(`Baris data ke-${r+1} wajib punya code dan name.`);
+      const values = {};
+      for (let i=0;i<critCodes.length;i++){
+        const raw = row[i+2];
+        const x = Number(raw);
+        if (!Number.isFinite(x) || x <= 0) throw new Error(`Nilai ${row[0]}.${critCodes[i]} harus > 0 (baris ${r+1}).`);
+        values[critCodes[i]] = x;
+      }
+      alternatives.push({ code: row[0], name: row[1], values });
+    }
+
+    state.title = state.title || "SPK WP (CSV)";
+    state.criteria = criteria;
+    state.alternatives = alternatives;
+    $("#caseTitle").value = state.title;
+
+    state.lastComputed = null;
+    renderAll();
+    $("#resultEmpty").style.display = "block";
+    $("#resultArea").style.display = "none";
+    $("#reportBox").value = "";
+    $("#appendixBox").value = "";
+
+    showToast("Import CSV berhasil. Klik Hitung untuk melihat ranking.", "success");
+  }
+
+  // ======== UI Builders ========
+  function renderCriteria(){
+    const tbody = $("#criteriaTable tbody");
+    tbody.innerHTML = "";
+
+    state.criteria.forEach((c, idx) => {
+      const tr = document.createElement("tr");
+      tr.innerHTML = `
+        <td><input value="${c.code}" data-k="code" data-i="${idx}" placeholder="C1" /></td>
+        <td><input value="${c.name}" data-k="name" data-i="${idx}" placeholder="Contoh: Harga" /></td>
+        <td>
+          <select data-k="type" data-i="${idx}">
+            <option value="benefit" ${safeLower(c.type)==="benefit"?"selected":""}>benefit</option>
+            <option value="cost" ${safeLower(c.type)==="cost"?"selected":""}>cost</option>
+          </select>
+        </td>
+        <td><input type="number" min="0.000001" step="any" value="${c.weight}" data-k="weight" data-i="${idx}" /></td>
+        <td><button class="btn small danger" data-del-crit="${idx}">Hapus</button></td>
+      `;
+      tbody.appendChild(tr);
+    });
+
+    tbody.querySelectorAll("input,select").forEach(el => {
+      el.addEventListener("input", (e)=>{
+        const i = Number(e.target.dataset.i);
+        const k = e.target.dataset.k;
+        state.criteria[i][k] = (k === "weight") ? Number(e.target.value) : e.target.value;
+        renderAltTable();
+      });
+    });
+
+    tbody.querySelectorAll("[data-del-crit]").forEach(btn=>{
+      btn.addEventListener("click", ()=>{
+        const i = Number(btn.dataset.delCrit);
+        const removed = state.criteria.splice(i,1)[0];
+        state.alternatives.forEach(a => { delete a.values[removed.code]; });
+        state.lastComputed = null;
+        renderAll();
+        $("#resultEmpty").style.display = "block";
+        $("#resultArea").style.display = "none";
+        $("#reportBox").value = "";
+        $("#appendixBox").value = "";
+      });
+    });
+  }
+
+  function renderAltTable(){
+    const thead = $("#altHead");
+    const tbody = $("#altBody");
+    const crit = state.criteria;
+
+    thead.innerHTML = `
+      <tr>
+        <th style="width:110px">Kode</th>
+        <th style="min-width:200px">Alternatif</th>
+        ${crit.map(c=> `<th style="min-width:150px">${c.code}<div class="badge ${safeLower(c.type)}" style="margin-top:6px; display:inline-flex;">${safeLower(c.type)}</div></th>`).join("")}
+        <th style="width:90px">Aksi</th>
+      </tr>
+    `;
+
+    tbody.innerHTML = "";
+    state.alternatives.forEach((a, ai) => {
+      const tr = document.createElement("tr");
+      if (!a.values) a.values = {};
+      crit.forEach(c=>{ if (a.values[c.code] == null) a.values[c.code] = 1; });
+
+      tr.innerHTML = `
+        <td><input value="${a.code}" data-ak="code" data-ai="${ai}" placeholder="A1" /></td>
+        <td><input value="${a.name}" data-ak="name" data-ai="${ai}" placeholder="Nama alternatif" /></td>
+        ${crit.map(c=> `
+          <td>
+            <input type="number" min="0.000001" step="any"
+              value="${a.values[c.code]}"
+              data-val="1" data-ai="${ai}" data-cc="${c.code}"
+              placeholder="> 0"
+            />
+          </td>
+        `).join("")}
+        <td><button class="btn small danger" data-del-alt="${ai}">Hapus</button></td>
+      `;
+      tbody.appendChild(tr);
+    });
+
+    tbody.querySelectorAll("input[data-ak]").forEach(el=>{
+      el.addEventListener("input", (e)=>{
+        const ai = Number(e.target.dataset.ai);
+        const k = e.target.dataset.ak;
+        state.alternatives[ai][k] = e.target.value;
+      });
+    });
+
+    tbody.querySelectorAll("input[data-val]").forEach(el=>{
+      el.addEventListener("input", (e)=>{
+        const ai = Number(e.target.dataset.ai);
+        const cc = e.target.dataset.cc;
+        state.alternatives[ai].values[cc] = Number(e.target.value);
+      });
+    });
+
+    tbody.querySelectorAll("[data-del-alt]").forEach(btn=>{
+      btn.addEventListener("click", ()=>{
+        const ai = Number(btn.dataset.delAlt);
+        state.alternatives.splice(ai, 1);
+        state.lastComputed = null;
+        renderAll();
+        $("#resultEmpty").style.display = "block";
+        $("#resultArea").style.display = "none";
+        $("#reportBox").value = "";
+        $("#appendixBox").value = "";
+      });
+    });
+  }
+
+  function renderAll(){
+    $("#caseTitle").value = state.title || "";
+    renderCriteria();
+    renderAltTable();
+  }
+
+  // ======== Output rendering ========
+  function renderWNormTable(criteria, precision){
+    const tbody = $("#wNormTable tbody");
+    tbody.innerHTML = "";
+    criteria.forEach(c=>{
+      const badge = safeLower(c.type) === "benefit"
+        ? `<span class="badge benefit">benefit</span>`
+        : `<span class="badge cost">cost</span>`;
+      const tr = document.createElement("tr");
+      tr.innerHTML = `
+        <td class="mono">${c.code}</td>
+        <td>${c.name || c.code}</td>
+        <td>${badge}</td>
+        <td class="mono">${c.weight}</td>
+        <td class="mono"><b>${fmt(c.wNorm, precision)}</b></td>
+      `;
+      tbody.appendChild(tr);
+    });
+  }
+
+  function renderChart(ranked, precision){
+    const maxV = Math.max(...ranked.map(r=>r.V));
+    const bars = $("#bars");
+    bars.innerHTML = "";
+    $("#chartMeta").textContent = `maxV=${fmt(maxV, precision)}`;
+
+    ranked.forEach((r)=>{
+      const pct = maxV > 0 ? (r.V / maxV) * 100 : 0;
+      const row = document.createElement("div");
+      row.className = "barRow";
+      row.innerHTML = `
+        <div class="barLabel" title="${r.name}">${r.rank}. ${r.name} (${r.code})</div>
+        <div class="barTrack"><div class="barFill" style="width:0%"></div></div>
+        <div class="barValue">${fmt(r.V, precision)}</div>
+      `;
+      bars.appendChild(row);
+      requestAnimationFrame(()=> row.querySelector(".barFill").style.width = pct.toFixed(2) + "%");
+    });
+  }
+
+  function renderRankingTable(ranked, precision){
+    const tbody = $("#resultTable tbody");
+    tbody.innerHTML = "";
+    ranked.forEach(r=>{
+      const tr = document.createElement("tr");
+      if (r.rank === 1) tr.classList.add("rank1");
+      tr.innerHTML = `
+        <td><b>${r.rank}</b></td>
+        <td class="mono">${r.code}</td>
+        <td>${r.name}</td>
+        <td class="mono">${fmt(r.lnS, precision)}</td>
+        <td class="mono">${fmt(r.S, precision)}</td>
+        <td class="mono"><b>${fmt(r.V, precision)}</b></td>
+      `;
+      tbody.appendChild(tr);
+    });
+  }
+
+  function renderFullDetail(criteria, ranked, precision){
+    const head = $("#fullHead");
+    const body = $("#fullBody");
+
+    const critCols = criteria.map(c=>{
+      const badge = safeLower(c.type)==="benefit"
+        ? `<span class="badge benefit">benefit</span>`
+        : `<span class="badge cost">cost</span>`;
+      return `
+        <th colspan="5" style="text-align:center; min-width: 520px;">
+          ${c.code} — ${c.name || c.code} ${badge}
+          <div class="muted" style="margin-top:6px;">sign=${c.sign}, wNorm=${fmt(c.wNorm, precision)}</div>
+        </th>
+      `;
+    }).join("");
+
+    head.innerHTML = `
+      <tr>
+        <th rowspan="2" style="width:90px">Kode</th>
+        <th rowspan="2" style="min-width:220px">Alternatif</th>
+        ${critCols}
+        <th rowspan="2" style="width:140px">Σ term<br><span class="muted">= ln(S)</span></th>
+        <th rowspan="2" style="width:160px">S</th>
+        <th rowspan="2" style="width:160px">V</th>
+      </tr>
+      <tr>
+        ${criteria.map(()=>`
+          <th style="min-width:90px">x</th>
+          <th style="min-width:120px">ln(x)</th>
+          <th style="min-width:70px">sign</th>
+          <th style="min-width:110px">wNorm</th>
+          <th style="min-width:140px">term</th>
+        `).join("")}
+      </tr>
+    `;
+
+    body.innerHTML = "";
+    ranked.forEach(r=>{
+      const tr = document.createElement("tr");
+
+      const critCells = criteria.map(c=>{
+        const d = r.perCrit[c.code];
+        return `
+          <td class="mono">${d ? d.x : ""}</td>
+          <td class="mono">${d ? fmt(d.lnX, precision) : ""}</td>
+          <td class="mono">${d ? d.sign : ""}</td>
+          <td class="mono">${d ? fmt(d.wNorm, precision) : ""}</td>
+          <td class="mono"><b>${d ? fmt(d.term, precision) : ""}</b></td>
+        `;
+      }).join("");
+
+      tr.innerHTML = `
+        <td class="mono">${r.code}</td>
+        <td>${r.name}</td>
+        ${critCells}
+        <td class="mono"><b>${fmt(r.lnS, precision)}</b></td>
+        <td class="mono">${fmt(r.S, precision)}</td>
+        <td class="mono"><b>${fmt(r.V, precision)}</b></td>
+      `;
+      body.appendChild(tr);
+    });
+  }
+
+  function renderResult(computed){
+    const p = computed.precision;
+    const ranked = computed.ranked;
+
+    $("#resultEmpty").style.display = "none";
+    $("#resultArea").style.display = "block";
+
+    const best = ranked[0];
+    $("#recommendationBox").innerHTML = `
+      <b>Rekomendasi:</b> alternatif terbaik adalah
+      <b style="color: var(--accent)">${best.name}</b> (${best.code})
+      dengan <b>V = ${fmt(best.V, p)}</b>.
+    `;
+
+    renderWNormTable(computed.criteria, p);
+    renderChart(ranked, p);
+    renderRankingTable(ranked, p);
+    renderFullDetail(computed.criteria, ranked, p);
+  }
+
+  // ======== File download helpers ========
+  function downloadText(filename, text, mime="text/plain"){
+    const blob = new Blob([text], {type: mime});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+  }
+
+  // ======== Export input JSON ========
+  function exportInputJSON(){
+    const payload = {
+      title: $("#caseTitle").value || state.title || "SPK WP",
+      criteria: state.criteria,
+      alternatives: state.alternatives
+    };
+    downloadText("wp-data.json", JSON.stringify(payload, null, 2), "application/json");
+    showToast("Export JSON input berhasil.", "success");
+  }
+
+  // ======== Export result JSON/CSV ========
+  function exportResultJSON(){
+    const c = state.lastComputed;
+    if (!c) return showToast("Belum ada hasil. Klik Hitung dulu.");
+
+    const payload = {
+      title: c.title,
+      precision: c.precision,
+      criteria: c.criteria.map(k=>({
+        code: k.code, name: k.name, type: k.type, sign: k.sign,
+        weight: k.weight, wNorm: k.wNorm
+      })),
+      ranking: c.ranked.map(r=>({
+        rank: r.rank, code: r.code, name: r.name,
+        lnS: r.lnS, S: r.S, V: r.V
+      })),
+      detail: c.ranked.map(r=>({
+        code: r.code, name: r.name,
+        perCriteria: Object.fromEntries(Object.entries(r.perCrit).map(([k,v])=>[
+          k, {x:v.x, lnX:v.lnX, sign:v.sign, wNorm:v.wNorm, term:v.term}
+        ])),
+        lnS: r.lnS, S: r.S, V: r.V
+      }))
+    };
+    downloadText("wp-hasil.json", JSON.stringify(payload, null, 2), "application/json");
+    showToast("Export hasil JSON berhasil.", "success");
+  }
+
+  function csvEscape(s){
+    const str = String(s ?? "");
+    if (/[",\n]/.test(str)) return '"' + str.replaceAll('"','""') + '"';
+    return str;
+  }
+
+  function exportResultCSV(){
+    const c = state.lastComputed;
+    if (!c) return showToast("Belum ada hasil. Klik Hitung dulu.");
+
+    const p = c.precision;
+    const critCodes = c.criteria.map(k=>k.code);
+
+    const lines = [];
+    lines.push(["title", c.title].map(csvEscape).join(","));
+    lines.push([]);
+    lines.push(["RANKING"].map(csvEscape).join(","));
+    lines.push(["rank","code","name","lnS","S","V"].map(csvEscape).join(","));
+    for (const r of c.ranked){
+      lines.push([r.rank, r.code, r.name, fmt(r.lnS,p), fmt(r.S,p), fmt(r.V,p)].map(csvEscape).join(","));
+    }
+
+    lines.push([]);
+    lines.push(["CRITERIA (wNorm)"].map(csvEscape).join(","));
+    lines.push(["code","name","type","sign","weight","wNorm"].map(csvEscape).join(","));
+    for (const k of c.criteria){
+      lines.push([k.code, k.name||k.code, k.type, k.sign, k.weight, fmt(k.wNorm,p)].map(csvEscape).join(","));
+    }
+
+    lines.push([]);
+    lines.push(["DETAIL PER ALTERNATIF (x,lnX,sign,wNorm,term)"].map(csvEscape).join(","));
+    const header = ["code","name", ...critCodes.flatMap(cc=>[
+      cc+"_x", cc+"_lnX", cc+"_sign", cc+"_wNorm", cc+"_term"
+    ]), "lnS","S","V"];
+    lines.push(header.map(csvEscape).join(","));
+
+    for (const r of c.ranked){
+      const row = [r.code, r.name];
+      for (const cc of critCodes){
+        const d = r.perCrit[cc];
+        row.push(d.x, fmt(d.lnX,p), d.sign, fmt(d.wNorm,p), fmt(d.term,p));
+      }
+      row.push(fmt(r.lnS,p), fmt(r.S,p), fmt(r.V,p));
+      lines.push(row.map(csvEscape).join(","));
+    }
+
+    downloadText("wp-hasil.csv", lines.join("\n"), "text/csv");
+    showToast("Export hasil CSV berhasil.", "success");
+  }
+
+  // ======== Import JSON/CSV ========
+  function importJSONFile(file){
+    const reader = new FileReader();
+    reader.onload = () => {
+      try{
+        const obj = JSON.parse(reader.result);
+        if (!obj.criteria || !obj.alternatives) throw new Error("Format JSON tidak sesuai.");
+        state.title = obj.title || "SPK Weighted Product (WP)";
+        state.criteria = obj.criteria.map(c=>({
+          code: String(c.code || "").trim(),
+          name: String(c.name || "").trim(),
+          type: safeLower(c.type || "benefit"),
+          weight: Number(c.weight || 1)
+        }));
+        state.alternatives = obj.alternatives.map(a=>({
+          code: String(a.code || "").trim(),
+          name: String(a.name || "").trim(),
+          values: {...(a.values || {})}
+        }));
+        state.lastComputed = null;
+        renderAll();
+        $("#resultEmpty").style.display = "block";
+        $("#resultArea").style.display = "none";
+        $("#reportBox").value = "";
+        $("#appendixBox").value = "";
+        showToast("Import JSON berhasil.", "success");
+      }catch(e){
+        showToast("Gagal import: " + e.message);
+      }
+    };
+    reader.readAsText(file);
+  }
+
+  function importCSVFile(file){
+    const reader = new FileReader();
+    reader.onload = () => {
+      try{
+        importFromCSVText(reader.result);
+      }catch(e){
+        showToast("Gagal import CSV: " + (e.message || String(e)));
+      }
+    };
+    reader.readAsText(file);
+  }
+
+  // ======== Report generator ========
+  function generateReport(){
+    const c = state.lastComputed;
+    if (!c) return showToast("Belum ada hasil. Klik Hitung dulu.");
+
+    const p = c.precision;
+    const title = c.title || "SPK Weighted Product (WP)";
+    const criteria = c.criteria;
+    const ranked = c.ranked;
+
+    const best = ranked[0];
+    const worst = ranked[ranked.length-1];
+
+    const critLines = criteria.map(k=>{
+      const t = safeLower(k.type) === "benefit" ? "Benefit" : "Cost";
+      return `- ${k.code} (${k.name || k.code}) | ${t} | bobot=${k.weight} | wNorm=${fmt(k.wNorm,p)} | sign=${k.sign}`;
+    }).join("\n");
+
+    const rankLines = ranked.map(r=>{
+      return `${r.rank}. ${r.name} (${r.code}) — ln(S)=${fmt(r.lnS,p)}, S=${fmt(r.S,p)}, V=${fmt(r.V,p)}`;
+    }).join("\n");
+
+    const report =
+`BAB HASIL DAN PEMBAHASAN (RINGKASAN)
+Judul Kasus: ${title}
+
+Metode: Weighted Product (WP).
+(R1) wNormⱼ = wⱼ / Σw
+(R2) signⱼ = +1 (benefit), -1 (cost)
+(R3) ln(Sᵢ) = Σ(signⱼ · wNormⱼ · ln(xᵢⱼ))
+(R4) Sᵢ = exp(ln(Sᵢ))
+(R5) Vᵢ = Sᵢ / ΣS
+
+Kriteria:
+${critLines}
+
+Hasil Perangkingan:
+${rankLines}
+
+Kesimpulan: Alternatif terbaik adalah ${best.name} (${best.code}) dengan V=${fmt(best.V,p)}.
+Alternatif terendah adalah ${worst.name} (${worst.code}) dengan V=${fmt(worst.V,p)}.`;
+
+    $("#reportBox").value = report;
+    showToast("Laporan berhasil dibuat.", "success");
+  }
+
+  // ======== Appendix generator (Academic-ready) ========
+  function generateAppendix(){
+    const c = state.lastComputed;
+    if (!c) return showToast("Belum ada hasil. Klik Hitung dulu.");
+
+    const p = c.precision;
+    const title = c.title || "SPK Weighted Product (WP)";
+    const criteria = c.criteria;
+    const ranked = c.ranked;
+    const critCodes = criteria.map(k=>k.code);
+
+    const pad = (s, w) => {
+      s = String(s);
+      return s.length >= w ? s.slice(0,w) : s + " ".repeat(w - s.length);
+    };
+    const row = (cells, widths) => cells.map((c,i)=>pad(c, widths[i])).join(" | ");
+    const line = (widths) => widths.map(w=>"-".repeat(w)).join("-+-");
+
+    // Table: criteria
+    const wCrit = [6, 18, 8, 6, 8, 10];
+    let tCrit = "";
+    tCrit += row(["Kode","Nama","Tipe","Sign","Bobot","wNorm"], wCrit) + "\n";
+    tCrit += line(wCrit) + "\n";
+    for (const k of criteria){
+      tCrit += row([
+        k.code,
+        (k.name||k.code),
+        safeLower(k.type),
+        String(k.sign),
+        String(k.weight),
+        fmt(k.wNorm,p)
+      ], wCrit) + "\n";
+    }
+
+    // Table: x matrix
+    const wX = [6, 18, ...critCodes.map(()=>12)];
+    let tX = "";
+    tX += row(["Kode","Alternatif", ...critCodes.map(c=>"x_"+c)], wX) + "\n";
+    tX += line(wX) + "\n";
+    for (const r of ranked){
+      const cells = [r.code, r.name, ...critCodes.map(cc=>String(r.perCrit[cc].x))];
+      tX += row(cells, wX) + "\n";
+    }
+
+    // Table: ln(x)
+    let tLnX = "";
+    tLnX += row(["Kode","Alternatif", ...critCodes.map(c=>"ln(x_"+c+")")], wX) + "\n";
+    tLnX += line(wX) + "\n";
+    for (const r of ranked){
+      const cells = [r.code, r.name, ...critCodes.map(cc=>fmt(r.perCrit[cc].lnX,p))];
+      tLnX += row(cells, wX) + "\n";
+    }
+
+    // Table: term + outputs
+    let tTerm = "";
+    const widthsTerm = [6,18, ...critCodes.map(()=>12), 12, 12, 12, 6];
+    tTerm += row(["Kode","Alternatif", ...critCodes.map(c=>"term_"+c), "Σterm(lnS)", "S", "V", "Rank"], widthsTerm) + "\n";
+    tTerm += line(widthsTerm) + "\n";
+    for (const r of ranked){
+      const cells = [
+        r.code, r.name,
+        ...critCodes.map(cc=>fmt(r.perCrit[cc].term,p)),
+        fmt(r.lnS,p), fmt(r.S,p), fmt(r.V,p), String(r.rank)
+      ];
+      tTerm += row(cells, widthsTerm) + "\n";
+    }
+
+    const notasi =
+`A. NOTASI DAN DEFINISI
+- i = indeks alternatif (i = 1..m)
+- j = indeks kriteria (j = 1..n)
+- xᵢⱼ = nilai alternatif i pada kriteria j (xᵢⱼ > 0)
+- wⱼ = bobot kriteria j (wⱼ > 0)
+- wNormⱼ = bobot ternormalisasi
+- signⱼ = +1 untuk benefit, -1 untuk cost
+- Sᵢ = nilai preferensi (produk berpangkat)
+- Vᵢ = nilai preferensi relatif (normalisasi S)
+
+B. RUMUS (DENGAN PENOMORAN)
+(R1)  wNormⱼ = wⱼ / Σ(w)
+(R2)  signⱼ = {+1 jika benefit; -1 jika cost}
+(R3)  ln(Sᵢ) = Σ( signⱼ · wNormⱼ · ln(xᵢⱼ) )
+(R4)  Sᵢ = exp( ln(Sᵢ) )
+(R5)  Vᵢ = Sᵢ / Σ(S)
+
+C. CATATAN
+Perhitungan menggunakan logaritma natural agar lebih stabil:
+produk berpangkat dihitung sebagai penjumlahan pada ruang log (R3).`;
+
+    const appendix =
+`LAMPIRAN PERHITUNGAN METODE WEIGHTED PRODUCT (WP)
+Judul Kasus: ${title}
+
+${notasi}
+
+D. TABEL KRITERIA (BOBOT, wNorm, SIGN)
+${tCrit}
+
+E. MATRKS NILAI xᵢⱼ
+${tX}
+
+F. MATRKS ln(xᵢⱼ)
+${tLnX}
+
+G. KONTRIBUSI termᵢⱼ DAN HASIL AKHIR
+${tTerm}
+
+H. INTERPRETASI SINGKAT
+Alternatif terbaik adalah ${ranked[0].name} (${ranked[0].code}) dengan nilai V tertinggi = ${fmt(ranked[0].V,p)}.
+Alternatif lain mengikuti urutan ranking pada tabel bagian G.`;
+
+    $("#appendixBox").value = appendix;
+    showToast("Lampiran berhasil dibuat.", "success");
+  }
+
+  // ======== Copy helpers ========
+  async function copyTextFrom(elId, emptyMsg){
+    const text = $(elId).value.trim();
+    if (!text) return showToast(emptyMsg || "Konten kosong.");
+    try{
+      await navigator.clipboard.writeText(text);
+      showToast("Berhasil disalin ke clipboard.", "success");
+    }catch{
+      showToast("Gagal copy (clipboard diblokir browser).");
+    }
+  }
+
+  // ======== Example + Reset ========
+  function loadExample(){
+    state.title = "Pemilihan Supplier Terbaik";
+    state.criteria = [
+      { code:"C1", name:"Harga",       type:"cost",    weight:5 },
+      { code:"C2", name:"Kualitas",    type:"benefit", weight:4 },
+      { code:"C3", name:"Waktu Kirim", type:"cost",    weight:3 },
+      { code:"C4", name:"Layanan",     type:"benefit", weight:2 },
+    ];
+    state.alternatives = [
+      { code:"A1", name:"Supplier A", values:{ C1:120, C2:85, C3:5, C4:80 } },
+      { code:"A2", name:"Supplier B", values:{ C1:110, C2:80, C3:6, C4:78 } },
+      { code:"A3", name:"Supplier C", values:{ C1:130, C2:90, C3:4, C4:82 } },
+    ];
+    state.lastComputed = null;
+    renderAll();
+    $("#resultEmpty").style.display = "block";
+    $("#resultArea").style.display = "none";
+    $("#reportBox").value = "";
+    $("#appendixBox").value = "";
+    showToast("Contoh dimuat. Klik Hitung.", "success");
+  }
+
+  function resetAll(){
+    state.title = "";
+    state.criteria = [
+      { code:"C1", name:"Kriteria 1", type:"benefit", weight:1 },
+      { code:"C2", name:"Kriteria 2", type:"cost", weight:1 }
+    ];
+    state.alternatives = [
+      { code:"A1", name:"Alternatif 1", values:{ C1:1, C2:1 } }
+    ];
+    state.lastComputed = null;
+    renderAll();
+    $("#resultEmpty").style.display = "block";
+    $("#resultArea").style.display = "none";
+    $("#reportBox").value = "";
+    $("#appendixBox").value = "";
+  }
+
+  // ======== Bindings ========
+  $("#btnPrint").addEventListener("click", ()=> window.print());
+
+  $("#btnAddCriteria").addEventListener("click", ()=>{
+    const idx = state.criteria.length + 1;
+    const code = "C" + idx;
+    state.criteria.push({ code, name: "Kriteria " + idx, type:"benefit", weight:1 });
+    state.alternatives.forEach(a=>{
+      if (!a.values) a.values = {};
+      a.values[code] = 1;
+    });
+    state.lastComputed = null;
+    renderAll();
+    $("#resultEmpty").style.display = "block";
+    $("#resultArea").style.display = "none";
+    $("#reportBox").value = "";
+    $("#appendixBox").value = "";
+  });
+
+  $("#btnAddAlt").addEventListener("click", ()=>{
+    const idx = state.alternatives.length + 1;
+    const code = "A" + idx;
+    const values = {};
+    state.criteria.forEach(c=> values[c.code] = 1);
+    state.alternatives.push({ code, name:"Alternatif " + idx, values });
+    state.lastComputed = null;
+    renderAll();
+    $("#resultEmpty").style.display = "block";
+    $("#resultArea").style.display = "none";
+    $("#reportBox").value = "";
+    $("#appendixBox").value = "";
+  });
+
+  $("#btnDeleteAll").addEventListener("click", ()=>{
+    resetAll();
+    showToast("Semua data direset.", "success");
+  });
+
+  $("#btnReset").addEventListener("click", resetAll);
+  $("#btnLoadExample").addEventListener("click", loadExample);
+
+  $("#caseTitle").addEventListener("input", (e)=> state.title = e.target.value);
+
+  $("#btnCompute").addEventListener("click", ()=>{
+    try{
+      state.title = $("#caseTitle").value || state.title;
+      const precision = Number($("#precision").value ?? 6);
+
+      const model = {
+        title: state.title || "SPK WP",
+        criteria: state.criteria.map(c=>({...c, weight:Number(c.weight)})),
+        alternatives: state.alternatives.map(a=>({ ...a, values: {...a.values} }))
+      };
+
+      validate(model);
+      const computed = computeWP(model, precision);
+      state.lastComputed = computed;
+      renderResult(computed);
+
+      $("#resultEmpty").style.display = "none";
+      $("#resultArea").style.display = "block";
+      showToast("Perhitungan selesai.", "success");
+    }catch(e){
+      showToast(e.message || String(e));
+    }
+  });
+
+  // input import/export
+  $("#btnExport").addEventListener("click", exportInputJSON);
+  $("#btnImport").addEventListener("click", ()=> $("#fileInput").click());
+  $("#fileInput").addEventListener("change", (e)=>{
+    const file = e.target.files?.[0];
+    if (file) importJSONFile(file);
+    e.target.value = "";
+  });
+
+  $("#btnImportCSV").addEventListener("click", ()=> $("#fileCSV").click());
+  $("#fileCSV").addEventListener("change", (e)=>{
+    const file = e.target.files?.[0];
+    if (file) importCSVFile(file);
+    e.target.value = "";
+  });
+
+  // copy summary
+  $("#btnCopyResult").addEventListener("click", async ()=>{
+    const c = state.lastComputed;
+    if (!c) return showToast("Belum ada hasil. Klik Hitung dulu.");
+    const p = c.precision;
+    const lines = c.ranked.map(r =>
+      `${r.rank}. ${r.name} (${r.code}) | lnS=${fmt(r.lnS,p)} | S=${fmt(r.S,p)} | V=${fmt(r.V,p)}`
+    );
+    const text = `Hasil Ranking WP — ${c.title}\n` + lines.join("\n");
+    try{
+      await navigator.clipboard.writeText(text);
+      showToast("Ringkasan hasil disalin.", "success");
+    }catch{
+      showToast("Gagal copy (clipboard diblokir).");
+    }
+  });
+
+  // export results
+  $("#btnExportResultJSON").addEventListener("click", exportResultJSON);
+  $("#btnExportResultCSV").addEventListener("click", exportResultCSV);
+
+  // report
+  $("#btnGenerateReport").addEventListener("click", generateReport);
+  $("#btnCopyReport").addEventListener("click", ()=> copyTextFrom("#reportBox", "Laporan masih kosong. Klik Generate dulu."));
+
+  // appendix
+  $("#btnGenerateAppendix").addEventListener("click", generateAppendix);
+  $("#btnCopyAppendix").addEventListener("click", ()=> copyTextFrom("#appendixBox", "Lampiran masih kosong. Klik Generate dulu."));
+  $("#btnExportAppendixTxt").addEventListener("click", ()=>{
+    const t = $("#appendixBox").value.trim();
+    if (!t) return showToast("Lampiran masih kosong. Klik Generate dulu.");
+    downloadText("wp-lampiran.txt", t, "text/plain");
+    showToast("Lampiran TXT berhasil diexport.", "success");
+  });
+
+  // init
+  resetAll();
+</script>
+</body>
+</html>
